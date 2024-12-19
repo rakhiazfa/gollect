@@ -13,6 +13,12 @@ func Collect[T interface{}](items []T) *Collection[T] {
 	return &Collection[T]{items, result}
 }
 
+func (collection *Collection[T]) Push(items ...T) *Collection[T] {
+	collection.result = append(collection.result, items...)
+
+	return collection
+}
+
 func (collection *Collection[T]) Map(callable func(T) T) *Collection[T] {
 	for idx, item := range collection.result {
 		collection.result[idx] = callable(item)
